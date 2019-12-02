@@ -5,7 +5,7 @@ from discord.ext import commands
 from collections import defaultdict
 import json
 client = commands.Bot(command_prefix="$")
-TOKEN = 'MjcyNzg2ODk3MTIwNjU3NDA4.XdhHig.9GdnMabvN5aBCzr-3jsOrwyvmF8'
+TOKEN = "Insert Token Here"
 userdictionary = defaultdict(int)
 usertime = {}
 uservoiceduration = defaultdict(float)
@@ -110,7 +110,7 @@ async def duration(ctx):
     with open('users.json', 'r') as f:
         users = json.load(f)
     users[str(ctx.message.author.id)]
-    bot_message = await ctx.channel.send(users[str(ctx.message.author.id)]['Voice Duration'])
+    bot_message = await ctx.channel.send(str(users[str(ctx.message.author.id)]['Voice Duration']) + "Seconds")
     await bot_message.delete(delay=10)
     await ctx.message.delete()
 
