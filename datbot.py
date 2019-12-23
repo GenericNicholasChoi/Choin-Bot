@@ -1,11 +1,13 @@
 import discord
+import leagueoflegends as l
 # this is the bot
 import datetime as dt
 from discord.ext import commands
 from collections import defaultdict
-import json
+import json 
+import os
 client = commands.Bot(command_prefix="$")
-TOKEN = "Insert Token Here"
+TOKEN = "INSERT TOKEN HERE"
 userdictionary = defaultdict(int)
 usertime = {}
 uservoiceduration = defaultdict(float)
@@ -33,11 +35,10 @@ async def on_ready():
 async def on_member_join(member):
     with open('users.json', 'r') as f:
         users = json.load(f)
-
         await update_data(users, member)
 
     with open('users.json', 'w') as f:
-        json.dump(users, f)
+        json.dumps(users, f)
 
 
 @client.event
@@ -92,7 +93,7 @@ async def on_voice_state_update(member, before, after):
 
 @client.command()
 async def count(ctx):
-    with open('users.json', 'r') as f:
+    with open("users.json", 'r') as f:
         users = json.load(f)
     bot_message = await ctx.channel.send(users[str(ctx.message.author.id)]['Message Count'])
     await bot_message.delete(delay=10)
@@ -143,5 +144,10 @@ async def react(ctx, message_id, emoji):
                 await message.add_reaction(emojis)
     else:
         await message.add_reaction(emojis)
+
+@client.command()
+async def league_game(ctx, region, summoner_name):
+    embed = l.game_search(region, summoner_name)
+    await ctx.channel.send(embed=embed.to_string())
 
 client.run(TOKEN)
