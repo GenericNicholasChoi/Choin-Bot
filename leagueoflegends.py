@@ -6,7 +6,7 @@ import cassiopeia as cass
 cass.set_riot_api_key("INSERT TOKEN HERE")
 
 class Match:
-
+    #create a match object to transfer information
     def __init__(self, region, summonername, redteam, blueteam, red_ban, blue_ban,colour):
         self.region = region
         self.summonername = summonername
