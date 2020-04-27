@@ -4,7 +4,7 @@ import leagueoflegends as l
 import datetime as dt
 from discord.ext import commands
 from collections import defaultdict
-from secret.py import discordbotkey
+from secret import discordbotkey
 import json 
 import os
 client = commands.Bot(command_prefix="$")
@@ -149,6 +149,11 @@ async def react(ctx, message_id, emoji):
 @client.command()
 async def league_game(ctx, region, summoner_name):
     embed = l.game_search(region, summoner_name)
+    await ctx.channel.send(embed=embed.to_string())
+
+@client.command()
+async def profile(ctx, region, summoner_name):
+    embed = l.profile(region,summoner_name)
     await ctx.channel.send(embed=embed.to_string())
 
 client.run(TOKEN)

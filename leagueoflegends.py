@@ -2,7 +2,7 @@
 import discord
 import json
 import cassiopeia as cass
-from secret.py import riotapikey
+from secret import riotapikey
 
 cass.set_riot_api_key(riotapikey)
 
@@ -73,4 +73,32 @@ def game_search(region, summonername):
         newMatch = Match(region, summonername,None,None,None,None, None)
     print("Match Searched")
     return newMatch
+
+class Profile:
+    
+    def __init__(self, region, summonername, level, champions):
+        self.region = region
+        self.summonername = summonername
+        self.level = level
+        self.champions = champions
+
+    def to_string(self):
+            embed = discord.Embed(title=self.summonername+"'s Profile")
+            embed.add_field(name='Favorite Champions', value=self.champions, inline=False)
+            embed.add_field(name="Level:", value=self.level, inline=True)
+            return embed
+
+
+def profile(region, summonername):
+    # search for the summoners top 3 played champions
+    champions = ""
+    summoner = cass.get_summoner(name=summonername,region=region)
+
+    for i in range(0,3):
+        champions += summoner.champion_masteries.pop(i).champion.name + ", "
+
+    return Profile(region,summonername,summoner.level,champions)
+    
+
+
 
