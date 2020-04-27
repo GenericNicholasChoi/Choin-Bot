@@ -4,10 +4,11 @@ import leagueoflegends as l
 import datetime as dt
 from discord.ext import commands
 from collections import defaultdict
+from secret.py import discordbotkey
 import json 
 import os
 client = commands.Bot(command_prefix="$")
-TOKEN = "MjcyNzg2ODk3MTIwNjU3NDA4.XgAf5w.94_4pOVLUHK5tYW5mZ-9DrpgX14"
+TOKEN = discordbotkey
 userdictionary = defaultdict(int)
 usertime = {}
 uservoiceduration = defaultdict(float)
