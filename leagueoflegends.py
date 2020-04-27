@@ -2,8 +2,9 @@
 import discord
 import json
 import cassiopeia as cass
+from secret.py import riotapikey
 
-cass.set_riot_api_key("INSERT TOKEN HERE")
+cass.set_riot_api_key(riotapikey)
 
 class Match:
     #create a match object to transfer information
