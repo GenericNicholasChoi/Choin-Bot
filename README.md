@@ -1,4 +1,5 @@
-# Discord-Bot-Bot-Choy
+# Discord Bot with Game tracking
+
 
 ## League of Legends Commands
 
